@@ -25,7 +25,7 @@ import javax.swing.JPopupMenu;
 /**
  * システムトレイ UI
  */
-public class TrayGui implements Gui {
+final class TrayGui implements Gui {
 
     private static final Logger LOG = Logger.getLogger(TrayGui.class.getName());
 
