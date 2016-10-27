@@ -3,6 +3,9 @@ package jp.realglobe.util.uploader.ui;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -33,9 +36,14 @@ public final class Main {
     private static final String OPTION_WATCH_DIRECTORY_PATH = "watchDir";
     private static final String OPTION_BASE_URL = "server";
     private static final String OPTION_USER_ID = "user";
+
+    private static final String OPTION_TARGET_EXTENSIONS = "ext";
+    private static final String OPTION_MIN_SIZE = "min";
+    private static final String OPTION_MAX_SIZE = "max";
     private static final String OPTION_NAME = "name";
     private static final String OPTION_FILE_DIRECTORY_PATH = "fileDir";
 
+    private static final String DEFAULT_NAME = "directory uploader ui";
     private static final String DEFAULT_FILE_DIRECTORY_NAME = ".directory-uploader-ui";
 
     /**
@@ -56,6 +64,9 @@ public final class Main {
                 .addOption(watchDirectoryPathOption)
                 .addOption(urlBaseOption)
                 .addOption(userIdOption)
+                .addOption(OPTION_TARGET_EXTENSIONS.substring(0, 1), OPTION_TARGET_EXTENSIONS, true, "upload file extensions separated by ','")
+                .addOption(OPTION_MIN_SIZE.substring(0, 1), OPTION_MIN_SIZE, true, "upload file size lower limit")
+                .addOption("M" /* OPTION_MAX_SIZE.substring(0, 1) */, OPTION_MAX_SIZE, true, "upload file size upper limit")
                 .addOption(OPTION_NAME.substring(0, 1), OPTION_NAME, true, "display name")
                 .addOption(OPTION_FILE_DIRECTORY_PATH.substring(0, 1), OPTION_FILE_DIRECTORY_PATH, true, "file directry path");
         final CommandLine parameters;
@@ -71,8 +82,19 @@ public final class Main {
         final Path watchDirectoryPath = Paths.get(parameters.getOptionValue(OPTION_WATCH_DIRECTORY_PATH));
         final String urlBase = parameters.getOptionValue(OPTION_BASE_URL);
         final String userId = parameters.getOptionValue(OPTION_USER_ID);
-        final String name = parameters.getOptionValue(OPTION_NAME);
+        final Set<String> targetExtensions = parseExtensions(parameters.getOptionValue(OPTION_TARGET_EXTENSIONS, null));
+        final long minSize = Long.parseLong(parameters.getOptionValue(OPTION_MIN_SIZE, "0"));
+        final long maxSize = Long.parseLong(parameters.getOptionValue(OPTION_MAX_SIZE, "0"));
+        final String name = parameters.getOptionValue(OPTION_NAME, DEFAULT_NAME);
         final Path fileDirectoryPath = Paths.get(parameters.getOptionValue(OPTION_FILE_DIRECTORY_PATH, Paths.get(System.getProperty("user.home"), DEFAULT_FILE_DIRECTORY_NAME).toString()));
+
+        LOG.info("Watch directory: " + watchDirectoryPath);
+        LOG.info("Server: " + urlBase);
+        LOG.info("User ID: " + userId);
+        LOG.info("Extensions: " + targetExtensions);
+        LOG.info("Min size: " + minSize);
+        LOG.info("Max size: " + maxSize);
+        LOG.info("File directory: " + fileDirectoryPath);
 
         final ExecutorService executor = Executors.newCachedThreadPool();
         try (final Gui gui = new TrayGui(name, watchDirectoryPath, new URL(urlBase))) {
@@ -81,7 +103,7 @@ public final class Main {
                 executor.shutdownNow();
             });
 
-            final DirectoryUploader uploader = new DirectoryUploader(watchDirectoryPath, urlBase, userId, name, new FileStore(fileDirectoryPath));
+            final DirectoryUploader uploader = new DirectoryUploader(watchDirectoryPath, targetExtensions, minSize, maxSize, urlBase, userId, name, new FileStore(fileDirectoryPath));
 
             LOG.info("Prepare token");
             gui.setStatusText("トークンを取得中です");
@@ -114,6 +136,26 @@ public final class Main {
                 LOG.warning("Shutdown is forced");
             }
         }
+    }
+
+    /**
+     * , 区切りの拡張子を読み取る
+     * @param text , 区切りの拡張子
+     * @return 拡張子の集合
+     */
+    private static Set<String> parseExtensions(final String text) {
+        if (text == null) {
+            return Collections.emptySet();
+        }
+        final String[] tokens = text.split(",");
+        final Set<String> set = new HashSet<>();
+        for (final String token : tokens) {
+            final String trimmed = token.trim();
+            if (!trimmed.isEmpty()) {
+                set.add(trimmed);
+            }
+        }
+        return set;
     }
 
 }
