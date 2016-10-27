@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -97,6 +98,15 @@ public final class Main {
         LOG.info("File directory: " + fileDirectoryPath);
 
         final ExecutorService executor = Executors.newCachedThreadPool();
+        final CountDownLatch stopper = new CountDownLatch(1);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            executor.shutdownNow();
+            try {
+                stopper.await();
+            } catch (final InterruptedException e) {
+                // せっかちさん
+            }
+        }));
         try (final Gui gui = new TrayGui(name, watchDirectoryPath, new URL(urlBase))) {
 
             gui.setOnExitPressed(() -> {
@@ -135,7 +145,9 @@ public final class Main {
             } catch (final InterruptedException e) {
                 LOG.warning("Shutdown is forced");
             }
+            stopper.countDown();
         }
+        // System.out.println("End");
     }
 
     /**
