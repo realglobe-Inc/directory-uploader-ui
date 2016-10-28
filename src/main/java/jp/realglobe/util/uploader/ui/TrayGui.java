@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicReference;
@@ -40,7 +41,7 @@ final class TrayGui implements Gui {
 
     private String status;
 
-    TrayGui(final String name, final Path watchDirectoryPath, final URL uploadUrl) throws AWTException {
+    TrayGui(final String name, final Path watchDirectoryPath, final URL uploadUrl) throws AWTException, IOException {
         if (!SystemTray.isSupported()) {
             throw new UnsupportedOperationException("System tray is not supported");
         }

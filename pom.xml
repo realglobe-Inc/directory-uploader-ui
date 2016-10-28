@@ -118,6 +118,15 @@
         <version>2.8.2</version>
       </plugin>
     </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>*</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 
   <distributionManagement>

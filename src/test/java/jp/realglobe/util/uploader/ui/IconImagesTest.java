@@ -10,9 +10,10 @@ public class IconImagesTest {
 
     /**
      * エラー落ちしないことの検査
+     * @throws Exception エラー
      */
     @Test
-    public void testGet() {
+    public void testGet() throws Exception {
         Assert.assertNotNull(IconImages.get());
     }
 
