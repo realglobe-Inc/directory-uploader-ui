@@ -1,25 +1,17 @@
 package jp.realglobe.util.uploader.ui;
 
 import java.awt.AWTException;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 /**
@@ -30,7 +22,6 @@ final class TrayGui implements Gui {
     private static final Logger LOG = Logger.getLogger(TrayGui.class.getName());
 
     private final TrayIcon icon;
-    private final JDialog exitDialog;
 
     private final AtomicReference<Runnable> exitCallback;
 
@@ -40,7 +31,7 @@ final class TrayGui implements Gui {
 
     private String status;
 
-    TrayGui(final String name, final Path watchDirectoryPath, final URL uploadUrl) throws AWTException {
+    TrayGui(final String name, final Path watchDirectoryPath, final URL uploadUrl) throws AWTException, IOException {
         if (!SystemTray.isSupported()) {
             throw new UnsupportedOperationException("System tray is not supported");
         }
@@ -72,52 +63,25 @@ final class TrayGui implements Gui {
             }
         });
 
+        // メニューの「メニューを閉じる」項目
+        final JMenuItem closeItem = new JMenuItem("メニューを閉じる");
+        closeItem.addActionListener(e -> {
+            popup.setVisible(false);
+        });
+        popup.add(closeItem);
+
         // メニューの「終了」項目
-        this.exitDialog = makeExitDialog(this.exitCallback);
         final JMenuItem exitItem = new JMenuItem("終了");
-        exitItem.addActionListener(e -> this.exitDialog.setVisible(true));
+        exitItem.addActionListener(e -> {
+            LOG.info("Exit button was pressed");
+            final Runnable callback = this.exitCallback.get();
+            if (callback != null) {
+                callback.run();
+            }
+        });
         popup.add(exitItem);
 
         SystemTray.getSystemTray().add(this.icon);
-    }
-
-    /**
-     * 終了確認ダイアログをつくる
-     * @param callback 終了ボタンが押されたときに実行される関数
-     * @return 終了確認ダイアログ
-     */
-    private static JDialog makeExitDialog(final AtomicReference<Runnable> callback) {
-        final JDialog dialog = new JDialog((JFrame) null, "確認");
-        dialog.setLayout(new GridLayout(0, 1));
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                // 閉じたら消える
-                dialog.setVisible(false);
-            }
-        });
-
-        final JLabel message = new JLabel("本当に終了させますか？");
-        final JPanel messagePanel = new JPanel();
-        messagePanel.setLayout(new FlowLayout());
-        messagePanel.add(message);
-        dialog.add(messagePanel);
-
-        final JButton button = new JButton("はい");
-        button.addActionListener(e -> {
-            LOG.info("Exit button was pressed");
-            dialog.setVisible(false);
-            final Runnable callback0 = callback.get();
-            if (callback0 != null) {
-                callback0.run();
-            }
-        });
-        final JPanel buttonPanel = new JPanel();
-        buttonPanel.add(button);
-        dialog.add(buttonPanel);
-
-        dialog.setMinimumSize(dialog.getPreferredSize());
-        return dialog;
     }
 
     private synchronized String getDisplayText() {
@@ -130,7 +94,6 @@ final class TrayGui implements Gui {
     @Override
     public void close() {
         SystemTray.getSystemTray().remove(this.icon);
-        this.exitDialog.dispose();
     }
 
     @Override
