@@ -48,8 +48,7 @@ VLC Media Player Portable は、インストールと言っても展開するだ
 
 ## 設定 <a id="config"/>
 
-エディタで [uploader.bat](uploader.bat) を開いて、SERVER, USER, JAR あたりを自分の環境に合わせて変更する。
-[capture.bat](capture.bat) は DEVICE, VLC あたり、[capture-without-display.bat](capture-without-display.bat) は DEVICE, FFMPEG あたりを変更する。
+[uploader.bat](uploader.bat), [capture.bat](capture.bat), [capture-without-display.bat](capture-without-display.bat) をエディタで開いて、変数値を自分の環境に合わせて変更する。
 
 DEVICE の値は VLC なら、VLC を起動して、メニューの「メディア」->「キャプチャーデバイスを開く」にあるビデオデバイス名から選ぶ。
 ffmpeg なら、コマンドプロンプトで以下のコマンドを実行して表示させる。
