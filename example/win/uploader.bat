@@ -1,7 +1,7 @@
 rem アップロード先サーバー
-set SERVER=http://localhost:3000/rest
+set SERVER=http://13.78.122.199/rest
 rem サーバーにおけるユーザー
-set USER=demo
+set USER=realglobe
 
 rem 監視するフォルダ
 set DIR=image
