@@ -13,7 +13,7 @@ rem アップロードするファイルの最大サイズ
 set MAX=8388608
 
 set JAVA=java
-set JAR=directory-uploader-ui-1.1.1-jar-with-dependencies.jar
+set JAR=directory-uploader-ui-1.2.0-jar-with-dependencies.jar
 
 
 %JAVA% -jar %JAR% ^
