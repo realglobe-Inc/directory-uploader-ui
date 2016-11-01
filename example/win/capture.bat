@@ -8,8 +8,7 @@ set ASPECT=16:9
 rem 何秒ごとに画像を保存するか
 set INTERVAL=10
 rem 出力サイズ
-rem set OUTPUT_SIZE=1280x720
-set OUTPUT_SIZE=1920x1080
+if "%OUTPUT_SIZE%"=="" set OUTPUT_SIZE=1920x1080
 
 rem 画像を保存するフォルダ
 set DIR=image
