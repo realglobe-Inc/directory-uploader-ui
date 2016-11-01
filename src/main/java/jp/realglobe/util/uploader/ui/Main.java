@@ -38,12 +38,15 @@ public final class Main {
     private static final String OPTION_BASE_URL = "server";
     private static final String OPTION_USER_ID = "user";
 
+    private static final String OPTION_DELAY = "delay";
+    private static final String OPTION_NOT_LATEST_ONLY = "noSkip";
     private static final String OPTION_TARGET_EXTENSIONS = "ext";
     private static final String OPTION_MIN_SIZE = "min";
     private static final String OPTION_MAX_SIZE = "max";
     private static final String OPTION_NAME = "name";
     private static final String OPTION_FILE_DIRECTORY_PATH = "fileDir";
 
+    private static final String DEFAULT_DELAY = "100";
     private static final String DEFAULT_NAME = "directory uploader ui";
     private static final String DEFAULT_FILE_DIRECTORY_NAME = ".directory-uploader-ui";
 
@@ -65,6 +68,8 @@ public final class Main {
                 .addOption(watchDirectoryPathOption)
                 .addOption(urlBaseOption)
                 .addOption(userIdOption)
+                .addOption(OPTION_DELAY.substring(0, 1), OPTION_DELAY, true, "detection delay to avoid uploading same file")
+                .addOption("S" /* OPTION_NOT_LATEST_ONLY.substring(0, 1) */, OPTION_NOT_LATEST_ONLY, false, "upload all files when many files are detected")
                 .addOption(OPTION_TARGET_EXTENSIONS.substring(0, 1), OPTION_TARGET_EXTENSIONS, true, "upload file extensions separated by ','")
                 .addOption(OPTION_MIN_SIZE.substring(0, 1), OPTION_MIN_SIZE, true, "upload file size lower limit")
                 .addOption("M" /* OPTION_MAX_SIZE.substring(0, 1) */, OPTION_MAX_SIZE, true, "upload file size upper limit")
@@ -83,6 +88,8 @@ public final class Main {
         final Path watchDirectoryPath = Paths.get(parameters.getOptionValue(OPTION_WATCH_DIRECTORY_PATH));
         final String urlBase = parameters.getOptionValue(OPTION_BASE_URL);
         final String userId = parameters.getOptionValue(OPTION_USER_ID);
+        final long delay = Long.parseLong(parameters.getOptionValue(OPTION_DELAY, DEFAULT_DELAY));
+        final boolean latestOnly = !parameters.hasOption(OPTION_NOT_LATEST_ONLY);
         final Set<String> targetExtensions = parseExtensions(parameters.getOptionValue(OPTION_TARGET_EXTENSIONS, null));
         final long minSize = Long.parseLong(parameters.getOptionValue(OPTION_MIN_SIZE, "0"));
         final long maxSize = Long.parseLong(parameters.getOptionValue(OPTION_MAX_SIZE, "0"));
@@ -92,6 +99,8 @@ public final class Main {
         LOG.info("Watch directory: " + watchDirectoryPath);
         LOG.info("Server: " + urlBase);
         LOG.info("User ID: " + userId);
+        LOG.info("Delay: " + delay);
+        LOG.info("Latest only: " + latestOnly);
         LOG.info("Extensions: " + targetExtensions);
         LOG.info("Min size: " + minSize);
         LOG.info("Max size: " + maxSize);
@@ -113,7 +122,7 @@ public final class Main {
                 executor.shutdownNow();
             });
 
-            final DirectoryUploader uploader = new DirectoryUploader(watchDirectoryPath, targetExtensions, minSize, maxSize, urlBase, userId, name, new FileStore(fileDirectoryPath));
+            final DirectoryUploader uploader = new DirectoryUploader(watchDirectoryPath, delay, latestOnly, targetExtensions, minSize, maxSize, urlBase, userId, name, new FileStore(fileDirectoryPath));
 
             LOG.info("Prepare token");
             gui.setStatusText("トークンを取得中です");
