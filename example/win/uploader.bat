@@ -1,7 +1,11 @@
 rem アップロード先サーバー
-set SERVER=http://localhost:3000/rest
-rem サーバーにおけるユーザー
-set USER=demo
+set SERVER=http://13.78.122.199/rest
+rem サーバーに名乗る ID
+set ID=b03c5702-1cf1-48fd-b00b-bf8ec0577c2a
+rem サーバーの認証トークン
+set TOKEN=a2fc62e5-4a5e-4aa9-a267-87d3c75a55ae
+rem サーバーで紐付くユーザー
+set USER=realglobe
 
 rem 監視するフォルダ
 set DIR=image
@@ -13,13 +17,15 @@ rem アップロードするファイルの最大サイズ
 set MAX=8388608
 
 set JAVA=java
-set JAR=directory-uploader-ui-1.1.1-jar-with-dependencies.jar
+set JAR=directory-uploader-ui-1.3.0-jar-with-dependencies.jar
 
 
 %JAVA% -jar %JAR% ^
-       -s %SERVER% ^
-       -u %USER% ^
-       -w %DIR% ^
-       -ext %EXTENSION% ^
-       -min %MIN% ^
-       -max %MAX%
+       --server %SERVER% ^
+       --id %ID% ^
+       --token %TOKEN% ^
+       --user %USER% ^
+       --watchDir %DIR% ^
+       --ext %EXTENSION% ^
+       --min %MIN% ^
+       --max %MAX%
