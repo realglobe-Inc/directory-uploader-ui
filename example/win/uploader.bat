@@ -17,7 +17,7 @@ rem アップロードするファイルの最大サイズ
 if "%MAX%"=="" set MAX=8388608
 
 if "%JAVA%"=="" set JAVA=java
-if "%JAR%"=="" set JAR=directory-uploader-ui-1.3.0-jar-with-dependencies.jar
+if "%JAR%"=="" set JAR=directory-uploader-ui-1.3.1-jar-with-dependencies.jar
 
 
 %JAVA% -jar %JAR% ^
