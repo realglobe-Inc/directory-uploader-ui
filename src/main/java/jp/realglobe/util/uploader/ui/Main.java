@@ -156,7 +156,7 @@ public final class Main {
             final String urlBase, final String userId, final String name, final Path fileDirectoryPath, final String id, final String token, final Gui gui, final ExecutorService executor) throws Exception {
 
         final DirectoryUploader uploader;
-        if (id != null && token != null) {
+        if (id != null && !id.isEmpty() && token != null && !token.isEmpty()) {
             uploader = new DirectoryUploader(watchDirectoryPath, delay, latestOnly, targetExtensions, minSize, maxSize, urlBase, userId, name, id, token);
         } else {
             uploader = new DirectoryUploader(watchDirectoryPath, delay, latestOnly, targetExtensions, minSize, maxSize, urlBase, userId, name, new FileStore(fileDirectoryPath));

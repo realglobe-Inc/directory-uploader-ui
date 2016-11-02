@@ -1,22 +1,22 @@
 rem キャプチャデバイス
-set DEVICE="eMPIA HDMI Grabber"
+if "%DEVICE%"=="" set DEVICE="eMPIA HDMI Grabber"
 rem 入力のフレームレート
-set /A FPS=30
+if "%FPS%"=="" set /A FPS=30
 rem 入力の横縦比率
-set ASPECT=16:9
+if "%ASPECT%"=="" set ASPECT=16:9
 
 rem 何秒ごとに画像を保存するか
-set INTERVAL=10
+if "%INTERVAL%"=="" set INTERVAL=10
 rem 出力サイズ
 if "%OUTPUT_SIZE%"=="" set OUTPUT_SIZE=1920x1080
 
 rem 画像を保存するフォルダ
-set DIR=image
+if "%DIR%"=="" set DIR=image
 rem 画像ファイル名の接頭辞
-set PREFIX=""
-set FORMAT=jpg
+if "%PREFIX%"=="" set PREFIX=""
+if "%FORMAT%"=="" set FORMAT=jpg
 
-set VLC="VLCPortable\VLCPortable.exe"
+if "%VLC%"=="" set VLC="VLCPortable\VLCPortable.exe"
 
 
 for /F "delims=x tokens=1-2" %%1 in ("%OUTPUT_SIZE%") do (
