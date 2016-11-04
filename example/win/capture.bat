@@ -25,6 +25,8 @@ for /F "delims=x tokens=1-2" %%1 in ("%OUTPUT_SIZE%") do (
 )
 set /A RATIO=%FPS%*%INTERVAL%
 
+call backup.bat
+
 %VLC% --video-filter=scene ^
       --scene-format=%FORMAT% ^
       --scene-width=%WIDTH% ^
