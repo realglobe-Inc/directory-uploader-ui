@@ -15,6 +15,8 @@ if "%FORMAT%"=="" set FORMAT=jpg
 if "%FFMPEG%"=="" set FFMPEG="ffmpeg-3.1.5-win64-static\bin\ffmpeg.exe"
 
 
+call backup.bat
+
 %FFMPEG% -rtbufsize 128MB ^
          -f dshow ^
          -i video=%DEVICE% ^
