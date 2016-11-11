@@ -1,4 +1,5 @@
 rem キャプチャデバイス
+rem メニューの「メディア」->「キャプチャーデバイスを開く」にあるビデオデバイス名から選ぶ
 if "%DEVICE%"=="" set DEVICE="eMPIA HDMI Grabber"
 rem 入力のフレームレート
 if "%FPS%"=="" set /A FPS=30

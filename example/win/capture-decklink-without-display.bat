@@ -20,7 +20,7 @@ if "%FFMPEG%"=="" set FFMPEG="ffmpeg-3.2-win64-static\bin\ffmpeg.exe"
 
 call backup.bat
 
-%FFMPEG% -f declink ^
+%FFMPEG% -f decklink ^
          -i %DEVICE%@%INPUT_FORMAT% ^
          -vf fps=1/%INTERVAL%,scale=%OUTPUT_SIZE% ^
          %DIR%\\%PREFIX%%%05d.%FORMAT%

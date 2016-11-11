@@ -1,4 +1,5 @@
 rem キャプチャデバイス
+rem 列挙する方法は ffmpeg.exe -list_devices true -f dshow -i dummy
 if "%DEVICE%"=="" set DEVICE="eMPIA HDMI Grabber"
 
 rem 何秒ごとに画像を保存するか
@@ -12,7 +13,7 @@ rem 画像ファイル名の接頭辞
 if "%PREFIX%"=="" set PREFIX=""
 if "%FORMAT%"=="" set FORMAT=jpg
 
-if "%FFMPEG%"=="" set FFMPEG="ffmpeg-3.1.5-win64-static\bin\ffmpeg.exe"
+if "%FFMPEG%"=="" set FFMPEG="ffmpeg-3.2-win64-static\bin\ffmpeg.exe"
 
 
 call backup.bat
