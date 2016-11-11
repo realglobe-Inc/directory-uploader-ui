@@ -1,17 +1,17 @@
-rem ã‚­ãƒ£ãƒ—ãƒãƒ£ãƒ‡ãƒã‚¤ã‚¹
-rem åˆ—æŒ™ã™ã‚‹æ–¹æ³•ã¯ ffmpeg.exe -f decklink -list_devices 1 -i dummy
+rem ƒLƒƒƒvƒ`ƒƒƒfƒoƒCƒX
+rem —ñ‹“‚·‚é•û–@‚Í ffmpeg.exe -f decklink -list_devices 1 -i dummy
 if "%DEVICE%"=="" set DEVICE="Intensity Shuttle"
-rem åˆ—æŒ™ã™ã‚‹æ–¹æ³•ã¯ ffmpeg.exe -f decklink -list_formats 1 -i ãƒ‡ãƒã‚¤ã‚¹
+rem —ñ‹“‚·‚é•û–@‚Í ffmpeg.exe -f decklink -list_formats 1 -i ƒfƒoƒCƒX
 if "%INPUT_FORMAT%" == "" set INPUT_FORMAT=9
 
-rem ä½•ç§’ã”ã¨ã«ç”»åƒã‚’ä¿å­˜ã™ã‚‹ã‹
+rem ‰½•b‚²‚Æ‚É‰æ‘œ‚ğ•Û‘¶‚·‚é‚©
 if "%INTERVAL%"=="" set INTERVAL=10
-rem å‡ºåŠ›ã‚µã‚¤ã‚º
+rem o—ÍƒTƒCƒY
 if "%OUTPUT_SIZE%"=="" set OUTPUT_SIZE=1920x1080
 
-rem ç”»åƒã‚’ä¿å­˜ã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€
+rem ‰æ‘œ‚ğ•Û‘¶‚·‚éƒtƒHƒ‹ƒ_
 if "%DIR%"=="" set DIR=image
-rem ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«åã®æ¥é ­è¾
+rem ‰æ‘œƒtƒ@ƒCƒ‹–¼‚ÌÚ“ª«
 if "%PREFIX%"=="" set PREFIX=""
 if "%FORMAT%"=="" set FORMAT=jpg
 

@@ -1,14 +1,14 @@
-rem キャプチャデバイス
+rem �L���v�`���f�o�C�X
 if "%DEVICE%"=="" set DEVICE="eMPIA HDMI Grabber"
 
-rem 何秒ごとに画像を保存するか
+rem ���b���Ƃɉ摜��ۑ����邩
 if "%INTERVAL%"=="" set INTERVAL=10
-rem 出力サイズ
+rem �o�̓T�C�Y
 if "%OUTPUT_SIZE%"=="" set OUTPUT_SIZE=1920x1080
 
-rem 画像を保存するフォルダ
+rem �摜��ۑ�����t�H���_
 if "%DIR%"=="" set DIR=image
-rem 画像ファイル名の接頭辞
+rem �摜�t�@�C�����̐ړ���
 if "%PREFIX%"=="" set PREFIX=""
 if "%FORMAT%"=="" set FORMAT=jpg
 
