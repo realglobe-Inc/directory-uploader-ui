@@ -36,6 +36,5 @@ call backup.bat
       --scene-ratio=%RATIO% ^
       dshow:// ^
       :dshow-vdev=%DEVICE% ^
-      :dshow-size=%INPUT_SIZE% ^
       :live-caching=300 ^
       --aspect-ratio=%ASPECT%
