@@ -1,2 +1,2 @@
 set OUTPUT_SIZE=1024x576
-call capture.bat
+call capture-dshow.bat

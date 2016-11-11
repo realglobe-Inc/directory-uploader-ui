@@ -1,19 +1,19 @@
-rem ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰å…ˆã‚µãƒ¼ãƒãƒ¼
+rem ƒAƒbƒvƒ[ƒhæƒT[ƒo[
 if "%SERVER%"=="" set SERVER=http://13.78.122.199/rest
-rem ã‚µãƒ¼ãƒãƒ¼ã«åä¹—ã‚‹ ID
+rem ƒT[ƒo[‚É–¼æ‚é ID
 if "%ID%"=="" set ID=""
-rem ã‚µãƒ¼ãƒãƒ¼ã®èªè¨¼ãƒˆãƒ¼ã‚¯ãƒ³
+rem ƒT[ƒo[‚Ì”FØƒg[ƒNƒ“
 if "%TOKEN%"=="" set TOKEN=""
-rem ã‚µãƒ¼ãƒãƒ¼ã§ç´ä»˜ããƒ¦ãƒ¼ã‚¶ãƒ¼
+rem ƒT[ƒo[‚Å•R•t‚­ƒ†[ƒU[
 if "%USER%"=="" set USER=realglobe
 
-rem ç›£è¦–ã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€
+rem ŠÄŽ‹‚·‚éƒtƒHƒ‹ƒ_
 if "%DIR%"=="" set DIR=image
-rem ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¨®é¡ž
+rem ƒAƒbƒvƒ[ƒh‚·‚éƒtƒ@ƒCƒ‹‚ÌŽí—Þ
 if "%EXTENSION%"=="" set EXTENSION=jpg,jpeg,png,bmp,gif,tiff
-rem ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å°ã‚µã‚¤ã‚º
+rem ƒAƒbƒvƒ[ƒh‚·‚éƒtƒ@ƒCƒ‹‚ÌÅ¬ƒTƒCƒY
 if "%MIN%"=="" set MIN=1024
-rem ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¤§ã‚µã‚¤ã‚º
+rem ƒAƒbƒvƒ[ƒh‚·‚éƒtƒ@ƒCƒ‹‚ÌÅ‘åƒTƒCƒY
 if "%MAX%"=="" set MAX=8388608
 
 if "%JAVA%"=="" set JAVA=java
