@@ -1,3 +1,7 @@
+# 使い方
+
+Blackmagic Design 社製キャプチャデバイス（Intensity Shuttle）で DJI Phantom の出力映像から画像を取得する場合。
+
 1. [キャプチャデバイスのドライバインストール](#driver)
 2. [Java のインストール](#java)
 3. [画像取得部分の動作確認](#capture)
@@ -5,10 +9,10 @@
 5. [終了方法](#shutdown)
 6. [画像が更新されないときは](#trouble)
 
+
 ## <div id="driver">キャプチャデバイスのドライバインストール</div>
 
-VersaCAP HD を PC に接続します。
-「VersaCAP HDドライバ」フォルダを開き、「EMBDA_x86_x64.INF」を右クリックし、「インストール」を選び、インストールを行います。
+「Desktop Video Installer v10.8.2.msi」を実行し、インストールを行います。
 
 
 ## <div id="java">Java のインストール</div>
@@ -18,9 +22,10 @@ VersaCAP HD を PC に接続します。
 
 ## <div id="capture">画像取得部分の動作確認</div>
 
-VersaCAP HD を PC に接続し、HDMI 出力を VersaCAP HD に接続します。
-「capture_高画質.bat」を実行し、映像が表示されることを確認します。
+Intensity Shuttle を PC に接続し、Phantom の HDMI 出力を Intensity Shuttle に接続します。
+「capture-decklink_中画質_表示無し_phantom50fps.bat」を実行します。
 「image」フォルダを開き、10 秒ごとに画像が保存されていくことを確認します。
+画像がカラーバーになる場合は、一旦[終了](#shutdown)させてから「capture-decklink_中画質_表示無し_phantom60fps.bat」を実行して確認します。
 
 
 ## <div id="uploader">画像アップロード部分の動作確認</div>
@@ -36,7 +41,8 @@ VersaCAP HD を PC に接続し、HDMI 出力を VersaCAP HD に接続します�
 ## <div id="trouble">画像が更新されないときは</div>
 
 まず、画像取得部分が動作しているか[確認](#capture)します。
-動作していない場合、VersaCAP HD 周りの不具合のことも多いため、画像取得を[終了](#shutdown)させて、VersaCAP HD をつなぎ直します。
+動作していない場合、スタートメニューを右クリックし、「デバイスマネージャ」を開きます。
+デバイスマネージャで Intensity Shuttle に「？」が付加されている場合、PC を再起動します。
 それでも直らない場合、HDMI から映像を出力しているか確認します。
 
 画像取得部分が動作している場合、インターネットに接続しているか確認します。
