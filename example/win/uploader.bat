@@ -1,5 +1,5 @@
 rem アップロード先サーバー
-if "%SERVER%"=="" set SERVER=http://13.78.122.199/rest
+if "%SERVER%"=="" set SERVER=http://localhost:8080/rest
 rem サーバーに名乗る ID
 if "%ID%"=="" set ID=""
 rem サーバーの認証トークン
