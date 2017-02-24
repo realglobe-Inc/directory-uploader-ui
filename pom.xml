@@ -22,7 +22,10 @@
   <artifactId>directory-uploader-ui</artifactId>
   <version>1.3.1</version>
   <packaging>jar</packaging>
-  <name>directory uploader ui</name>
+
+  <name>Directory uploader UI</name>
+  <description>Directory uploader のシステムトレイ UI</description>
+  <url>https://github.com/realglobe-Inc/directory-uploader-ui</url>
 
   <licenses>
     <license>
@@ -30,6 +33,21 @@
       <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <name>Daisuke Fukuchi</name>
+      <email>fukuchidaisuke@realglobe.jp</email>
+      <organization>realglobe Inc.</organization>
+      <organizationUrl>http://realglobe.jp/</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/realglobe-Inc/directory-uploader-ui.git</connection>
+    <developerConnection>scm:git:ssh://github.com:realglobe-Inc/directory-uploader-ui.git</developerConnection>
+    <url>https://github.com/realglobe-Inc/directory-uploader-ui</url>
+  </scm>
 
   <properties>
     <java.version>1.8</java.version>
