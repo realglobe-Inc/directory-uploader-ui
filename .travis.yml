@@ -5,3 +5,6 @@ cache:
   directories:
     - .autoconf
     - $HOME/.m2
+before_install:
+  - mkdir -p $HOME/.m2
+  - cp example/settings-bintray.xml $HOME/.m2/settings.xml
