@@ -8,3 +8,8 @@ directory-uploader のシステムトレイ UI。
 ```
 $ mvn clean compile assembly:single
 ```
+
+
+## ライセンス
+
+Apache License, Version 2.0
