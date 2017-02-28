@@ -24,7 +24,7 @@
   <packaging>jar</packaging>
 
   <name>Directory uploader UI</name>
-  <description>Directory uploader のシステムトレイ UI</description>
+  <description>System tray UI for directory-uploader</description>
   <url>https://github.com/realglobe-Inc/directory-uploader-ui</url>
 
   <licenses>
