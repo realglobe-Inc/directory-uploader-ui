@@ -5,11 +5,6 @@ cache:
   directories:
     - .autoconf
     - $HOME/.m2
-install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --settings .travis-settings.xml
-script: mvn test -B --settings .travis-settings.xml
-deploy:
-  provider: script
-  script: ./.travis-deploy.sh
-  skip_cleanup: true
-  on:
-    branch: master
+before_install:
+  - mkdir -p $HOME/.m2
+  - cp example/settings-bintray.xml $HOME/.m2/settings.xml
